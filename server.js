@@ -6,7 +6,7 @@
 * 
 *  Name: ______Alex Lin________________ Student ID: __128779220____________ Date: __2023/5/30______________
 *
-*  Online (Cyclic) URL: 
+*  Online (Cyclic) URL: https://weary-fox-fashion.cyclic.app/about
 *
 ********************************************************************************/ 
 
@@ -19,7 +19,6 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-
   res.redirect("/about")
 });
 
@@ -29,7 +28,7 @@ app.get('/about', (req, res) => {
 
 app.get('/shop', (req, res) => {
   store_service.getPublishedItems().then((data)=>{
-    res.send(data)
+    res.json(data)
   }).catch((err)=>{
     return {'message': err}
   })
@@ -37,7 +36,7 @@ app.get('/shop', (req, res) => {
 
 app.get('/items', (req, res) => {
   store_service.getAllItems().then((data)=>{
-    res.send(data)
+    res.json(data)
   }).catch((err)=>{
     return {'message': err}
   })
@@ -45,7 +44,7 @@ app.get('/items', (req, res) => {
 
 app.get('/categories', (req, res) => {
     store_service.getCategories().then((data)=>{
-      res.send(data)
+      res.json(data)
     }).catch((err)=>{
       return {'message': err}
     })
