@@ -65,3 +65,69 @@ module.exports.getCategories= () =>{
     })
 };
 
+module.exports.addItem = (itemData)=>{
+    return new Promise((resolve,reject)=>{
+        if(!itemData)
+        {
+            itemData.published=false;
+        }else{
+            itemData.published=true;
+        }
+        itemData.id=items.length+1;
+        items.push(itemData);
+        resolve(itemData);
+    })
+};
+
+module.exports.getItemsByCategory = (category)=>{
+    result=[];
+return new Promise((resolve,reject)=>{
+    for(let i=0;i<items.length;i++)
+    {
+        if(items[i].category==category)
+        {
+            result.push(items[i]);
+        }
+    }
+    if(result.length==0)
+    {
+        reject("no results returned");
+    }else{
+        resolve(result);
+    }
+})
+};
+
+
+module.exports.getItemsByMinDate = (minDateStr)=>{
+    result=[];
+    return new Promise((resolve,reject)=>{
+        for(let i=0;i<items.length;i++)
+        {
+            if(new Date(items[i].postDate) >= new Date(minDateStr))
+            {
+                result.push(items[i]);
+            }
+        }
+        if(result.length==0)
+        {
+            reject("no results returned");
+        }else{
+            resolve(result);
+        }
+
+    })  
+};
+
+module.exports.getItemById = (id)=>{
+    return new Promise((resolve,reject)=>{
+        for(let i=0;i<items.length;i++)
+        {
+            if(items[i].id==id)
+            {
+                resolve(items[i]);
+            }
+        }
+        reject("no result returned");
+    })
+} 
