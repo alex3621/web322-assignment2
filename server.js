@@ -41,7 +41,7 @@ app.get('/shop', (req, res) => {
   store_service.getPublishedItems().then((data)=>{
     res.json(data)
   }).catch((err)=>{
-    return {'message': err}
+    res.json(err);
   })
 });
 
@@ -53,20 +53,20 @@ app.get('/items', (req, res) => {
     store_service.getItemsByCategory(cat).then((data)=>{
       res.json(data)
     }).catch((err)=>{
-      return {'message': err}
+      res.json(err);
     })
   }else if(mDate)
   {
     store_service.getItemsByMinDate(mDate).then((data)=>{
       res.json(data)
     }).catch((err)=>{
-      return {'message': err}
+      res.json(err);
     })
   }else{
     store_service.getAllItems().then((data)=>{
       res.json(data)
     }).catch((err)=>{
-      return {'message': err}
+      res.json(err);
     })
   }
 });
@@ -81,7 +81,7 @@ app.get('/items/:value', (req, res) => {
   store_service.getItemById(value).then((data)=>{
     res.json(data)
   }).catch((err)=>{
-    return {'message': err}
+    res.json(err);
   })
 });
 
@@ -89,7 +89,7 @@ app.get('/categories', (req, res) => {
     store_service.getCategories().then((data)=>{
       res.json(data)
     }).catch((err)=>{
-      return {'message': err}
+      res.json(err);
     })
   });
 
