@@ -67,7 +67,7 @@ module.exports.getCategories= () =>{
 
 module.exports.addItem = (itemData)=>{
     return new Promise((resolve,reject)=>{
-        if(!itemData)
+        if(!itemData.published)
         {
             itemData.published=false;
         }else{

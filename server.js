@@ -6,7 +6,7 @@
 * 
 *  Name: ______Alex Lin________________ Student ID: __128779220____________ Date: __2023/6/10___________
 *
-*  Online (Cyclic) URL: 
+*  Online (Cyclic) URL: https://combative-hen-costume.cyclic.app
 *
 ********************************************************************************/ 
 
@@ -71,6 +71,11 @@ app.get('/items', (req, res) => {
   }
 });
 
+app.get('/items/add', (req, res) => {
+  console.log("test");
+    res.sendFile(__dirname + "/views/addItem.html")
+  });
+
 app.get('/items/:value', (req, res) => {
   const value = parseInt(req.params.value, 10);
   store_service.getItemById(value).then((data)=>{
@@ -88,9 +93,7 @@ app.get('/categories', (req, res) => {
     })
   });
 
-  app.get('/items/add', (req, res) => {
-    res.sendFile(__dirname + "/views/addItem.html")
-  });
+
 
   app.post('/items/add',upload.single("featureImage"),(req,res)=>{
     if(req.file){
