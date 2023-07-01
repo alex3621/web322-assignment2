@@ -66,14 +66,16 @@ module.exports.getCategories= () =>{
 };
 
 module.exports.addItem = (itemData)=>{
+    const date = new Date();
     return new Promise((resolve,reject)=>{
-        if(!itemData.published)
+        if(!itemData)
         {
             itemData.published=false;
         }else{
             itemData.published=true;
         }
         itemData.id=items.length+1;
+        itemData.postDate= date.getFullYear() + (date.getMonth() + 1) + date.getDate();
         items.push(itemData);
         resolve(itemData);
     })
@@ -131,3 +133,22 @@ module.exports.getItemById = (id)=>{
         reject("no result returned");
     })
 } 
+
+module.exports.getPublishedItemsByCategory = (category)=>{
+    return new Promise((resolve,reject)=>{
+        let pubItems = [];
+        for (let i=0;i<items.length;i++)
+        {
+            if(items[i].published==true && items[i].category == category)
+            {
+                pubItems.push(items[i]);
+            }
+        }
+        if(pubItems.length==0)
+        {
+            reject("no matching items");
+        }else{
+            resolve(pubItems);
+        }
+    })
+}
